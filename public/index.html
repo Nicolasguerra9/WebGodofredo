@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godofredo's foro</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <form id="task-form">
+        <div class="form-group">
+            <input type="gmail" id="task-title" class="form-control" placeholder="gmail">
+        </div>
+        <div class="form-group">
+            <input type="password" id="task-description" class="form-control" placeholder="password">
+        </div>
+        <button class="btn">Send</button>
+    </form>
+
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyARcCiDcOJE4PSJQEE-RyLGr43P8QnMeoI",
+          authDomain: "godofredo-a880f.firebaseapp.com",
+          databaseURL: "https://godofredo-a880f-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "godofredo-a880f",
+          storageBucket: "godofredo-a880f.appspot.com",
+          messagingSenderId: "679438036638",
+          appId: "1:679438036638:web:8759dc32e09ed956b9d58f"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>
+    <script src="index.js"></script>
+    
+
+
+    <header>
+        <div class="contenedor-general">
+            <p class="logo">
+                <img src="./logo/LOGO-GODO.jpg" alt="Logo de GodoFredo" style="width: 70px; height: 70px; vertical-align: middle;">
+                GodoFredo's
+            </p>
+            <nav id="menu-principal">
+                <a href="#">Inicio</a>
+                <a href="#">About us</a>
+                <a href="login.html">Iniciar sesión</a>
+                <a href="#">Registrarse</a>
+            </nav>
+        </div>
+    </header>
+    
+
+    <section id="banner-bienvenida-web">
+        <video autoplay muted loop id="video-banner">
+            <source src="./img/videoplayback.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+        <div class="contenido-banner">
+            <h1 class="scroll-animation">Visita nuestro foro <br>con los Mejores repositórios</h1>
+            <a href="#" target="_blank">
+                <button class="scroll-animation"><b>¡Descubre nuestros servicios!</b></button>
+            </a>
+        </div>
+    </section>
+
+    
+    <!-- Aplica la clase "scroll-animation" a los demás elementos -->
+    
+
+    <section id="servicios-de-godofredo" class="scroll-animation">
+        <div class="contenedor-general">
+            <h2>¡Elige un tema!</h2>
+            <div class="servicios">
+                <a href="enlace-al-detalle-front-end.html" class="carta">
+                    <h3>Docker</h3>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <img src="./img/docker-img.png" alt="">
+                    
+                </a>
+                
+                <a href="enlace-al-detalle-full-stack.html" class="carta">
+                    <h3>Hacking tools</h3>
+                    <img src="./img/hackinkg-tools.png" alt="">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <img src="./img/hackinkg-tools.png" alt="">
+
+                </a>
+                
+                <a href="enlace-al-detalle-python.html" class="carta">
+                    <h3>ISO files</h3>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <img src="./img/python-img.png" alt="">
+
+                    
+                </a>  
+            </div>
+        </div>
+    </section>
+
+
+    
+
+    <footer>
+        <div class="contenedor-general">
+            <p>&copy; Godofredo's 2024</p>
+        </div>
+    </footer>
+
+
+
+
+    <script>
+        // Función para observar elementos en el viewport
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.scroll-animation');
+    
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible'); // Agrega la clase visible cuando el elemento es visible
+                    } else {
+                        entry.target.classList.remove('visible'); // Opcional: quita la clase cuando el elemento ya no es visible
+                    }
+                });
+            }, { threshold: 0.1 }); // El umbral define qué tan visible debe estar el elemento
+    
+            elements.forEach(el => observer.observe(el));
+        });
+
+        
+    </script>
+
+    
+    
+</body>
+</html>
