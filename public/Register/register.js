@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js';
-import { getFirestore, doc, setDoc, getDoc, collection, query, orderBy, limit, getDocs } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js';
+import { getFirestore, doc, setDoc, getDoc, collection, query, where, orderBy, limit, getDocs, addDoc } from 'https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -54,7 +54,7 @@ function bufferToHex(buffer) {
 // Genera un nuevo ID de usuario
 async function generateUserId() {
     const usersRef = collection(db, 'Usuarios');
-    const q = query(usersRef, orderBy("id_usuarios"), limit(1)); // Ordena por id_usuarios y limita a 1
+    const q = query(usersRef, orderBy("id_usuarios", "desc"), limit(1)); // Ordena por id_usuarios en orden descendente y limita a 1
     const querySnapshot = await getDocs(q);
     
     // Si hay documentos, obtiene el mayor id_usuarios y le suma uno
@@ -93,36 +93,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             try {
-                const userId = await generateUserId(); // Genera un nuevo id_usuarios
+                // Verifica si el usuario ya existe usando una consulta en la colección
+                const usersRef = collection(db, 'Usuarios');
+                const userQuery = query(usersRef, where("email", "==", email));
+                const userSnapshot = await getDocs(userQuery);
 
-                // Crea referencia al documento con el nuevo id_usuarios como ID
-                const userDocRef = doc(db, 'Usuarios', userId.toString()); 
-
-                // Verifica si el usuario ya existe
-                const userSnapshot = await getDoc(userDocRef);
-                if (userSnapshot.exists()) {
+                if (!userSnapshot.empty) {
                     console.log('El usuario ya existe');
                     alert("El usuario ya existe, intenta con otro email.");
                     return;
                 }
 
-                const { hash: hashedPassword, salt } = await hashPassword(password);
-                const fechaCreacion = new Date();
-                const estadoCuenta = true;
-                const proyectosAsociados = [];
-                const rol = "usuario";
+                const userId = await generateUserId(); // Genera un nuevo id_usuarios
 
-                // Guarda el documento en Firestore con el id_usuarios como ID
-                await setDoc(userDocRef, {
-                    // Aquí no incluimos 'id_usuarios' como un campo dentro del documento
+                // Generar el hash y el salt de la contraseña
+                const { hash: hashedPassword, salt } = await hashPassword(password);
+
+                // Crea una nueva referencia al documento, generando automáticamente un ID
+                await addDoc(usersRef, {
+                    id_usuarios: userId, // Almacena el id_usuarios como un campo
                     contraseña: hashedPassword,
                     salt: salt,
                     email: email,
-                    estado_cuenta: estadoCuenta,
-                    fecha_creacion: fechaCreacion,
+                    estado_cuenta: true,
+                    fecha_creacion: new Date(),
                     nombre_usuario: email.split('@')[0],
-                    proyectos_asociados: proyectosAsociados,
-                    rol: rol
+                    proyectos_asociados: [],
+                    rol: "usuario"
                 });
 
                 console.log('Cuenta creada con éxito!');
