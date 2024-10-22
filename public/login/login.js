@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Verifica si el usuario existe
                 if (querySnapshot.empty) {
                     console.error("El email no está registrado.");
-                    alert("El email no está registrado. Por favor, intenta de nuevo.");
+                    alert("Por favor, inténtalo de nuevo. El Usuario o Contraseña no es correcto");
                     return;
                 }
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = "../index.html";
                 } else {
                     console.error("Contraseña incorrecta.");
-                    alert("La contraseña es incorrecta. Por favor, inténtalo de nuevo.");
+                    alert("Por favor, inténtalo de nuevo. El Usuario o Contraseña no es correcto");
                 }
             } catch (error) {
                 console.error("Error durante el inicio de sesión: ", error);
