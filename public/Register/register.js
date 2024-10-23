@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Verifica si las contraseñas coinciden
             if (password !== confirmPassword) {
                 console.error("Las contraseñas no coinciden");
-                alert("Las contraseñas no coinciden, por favor, inténtalo de nuevo.");
+                alert("Las contraseñas no coinciden, por favor, inténtalo de nuevo");
                 return;
             }
 
