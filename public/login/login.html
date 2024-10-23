@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="login.css"> <!-- Añade el CSS en este archivo -->
 </head>
+
 <body>
-    <form id="login">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar sesión</button>
-    </form>    
-    
+    <div class="login">
+        <form id="login" class="login-container">
+            <!-- Añade el logo aquí -->
+            <div class="logo-container">
+                <img src="../logo/LOGO-GODO.jpg" alt="Logo" class="logo" /> <!-- Asegúrate de proporcionar la ruta correcta de tu logo -->
+                <h1>Login</h1>
+            </div>
+
+            <p><input type="email" name="email" placeholder="Email" required></p>
+            <p><input type="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required></p>
+            <p><button type="submit">Login</button></p>
+        </form>
+    </div>
 
     <!-- Enlace a firebaseConfig.js -->
     <script type="module" src="./login.js"></script>
-
 </body>
+
 </html>
